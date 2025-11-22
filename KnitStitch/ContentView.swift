@@ -9,16 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var before: String = ""
-    @State private var change: String = ""
-    @State private var after: String = ""
-    
-    enum ChangeSign {
-        case add
-        case subtract
-    }
-    
-    @State private var changeSign: ChangeSign = .add
+    @StateObject private var viewModel = KnitStitchViewModel()
     
     var body: some View {
         GeometryReader { geo in
@@ -35,39 +26,50 @@ struct ContentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                         Spacer()
                     }
-                   
                 }
                 .frame(height: geo.size.height * 0.04)
+
                 Text("I have this many stitches:")
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                numberField(title: "Before", text: $before)
+                numberField(title: "Before", text: Binding(
+                    get: { viewModel.before ?? 0 },
+                    set: { viewModel.before = $0 }
+                ))
+                    .onChange(of: viewModel.before) { _ in
+                        viewModel.recalcFromBefore()
+                    }
+
                 Text("I want to change by:")
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 HStack {
                     Button {
-                        changeSign = (changeSign == .add ? .subtract : .add)
-                        let digits = change.dropFirst().filter { $0.isNumber }
-                        let newSign = (changeSign == .add ? "+" : "-")
-                        if digits.isEmpty {
-                            change = newSign
-                        } else {
-                            change = newSign + digits
-                        }
+                        viewModel.toggleSign()
                     } label: {
                         Image(systemName: "plus.forwardslash.minus")
                             .font(.title)
                     }
-                    
-                    numberField(title: (changeSign == .add ? "+/-" : "-/+"), text: $change)
-                    
+                    numberField(title: "+/-", text: Binding(
+                        get: { viewModel.change ?? 0 },
+                        set: { viewModel.change = $0 }
+                    ), isSigned: true)
+                        .onChange(of: viewModel.change) { _ in
+                            viewModel.recalcFromChange()
+                            }
                 }
+
                 Text("To end up with:")
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                numberField(title: "After", text: $after)
+                numberField(title: "After", text: Binding(
+                    get: { viewModel.after ?? 0 },
+                    set: { viewModel.after = $0 }
+                ))
+                    .onChange(of: viewModel.after) { _ in
+                        viewModel.recalcFromAfter()
+                    }
             }
             .padding()
             .toolbar {
@@ -89,6 +91,7 @@ extension View {
                                         to: nil, from: nil, for: nil)
     }
 }
-#Preview {
-    ContentView()
-}
+
+//#Preview {
+//    ContentView()
+//}
