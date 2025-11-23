@@ -35,15 +35,15 @@ extension ContentView {
             }
             
             // Plus / minus buttons
-            HStack(spacing: 12) {
+            HStack(spacing: 8) {
                 Button(action: { text.wrappedValue -= 1 }) {
                     Image(systemName: "minus.square")
-                        .font(.title)
+                        .font(.largeTitle)
                 }
                 
                 Button(action: { text.wrappedValue += 1 }) {
                     Image(systemName: "plus.square")
-                        .font(.title)
+                        .font(.largeTitle)
                 }
             }
         }

@@ -70,7 +70,21 @@ struct ContentView: View {
                     .onChange(of: viewModel.after) { _ in
                         viewModel.recalcFromAfter()
                     }
-            }
+                Text("Then do like this:")
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Text(viewModel.recipe)
+                    .multilineTextAlignment(.leading)
+                    .padding(5)
+                    .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
+                    .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+//                    .textFieldStyle(.roundedBorder)
+                    .font(.title2)
+                    
+                
+            }  // end VStack
             .padding()
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -80,7 +94,7 @@ struct ContentView: View {
                     }
                 }
             }
-        }
+        }  // end GeometryReader
     } // end View
     
 }
