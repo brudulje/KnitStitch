@@ -19,11 +19,13 @@ struct ContentView: View {
                         // Logo
                         Spacer()
                         Text("KnitStitch")
+                            .foregroundColor(Color.purple)
                             .font(.headline)
                             .padding(3)
-                            .background(Color.black.opacity(0.5))
+//                            .background(Color.secondary.opacity(0.1))  // no background, using frame instead
                             .foregroundColor(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.purple, lineWidth: 1))
                         Spacer()
                     }
                 }
@@ -79,7 +81,7 @@ struct ContentView: View {
                     .padding(5)
                     .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
                     .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.secondary, lineWidth: 1))
 //                    .textFieldStyle(.roundedBorder)
                     .font(.title2)
                     
@@ -89,9 +91,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
-                    Button("Done") {
-                        hideKeyboard()
-                    }
+                    Button { hideKeyboard() } label: { Text("Done").bold() }
                 }
             }
         }  // end GeometryReader
