@@ -1,0 +1,39 @@
+
+# Xcode
+build/
+*/Assets.xcassets/AppIcon.appiconset/*
+
+logo/*
+!logo/AppIcon1024.png
+screenshots/*
+AppStoreInfoMathulator.txt
+
+# Xcode workspace and user settings
+*.xcworkspace/xcuserdata/
+*.xcuserdatad/
+*.xcscmblueprint
+*.xccheckout
+*.xcuserstate
+
+# SwiftPM
+.build/
+.swiftpm/
+
+# Logs and system files
+*.log
+.DS_Store
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Archives and symbolication
+*.xcarchive
+*.dSYM
+
+# Previews
+*.preview-thumbnails
+
+# Temporary or swap files
+*.swp
+*.moved-aside
