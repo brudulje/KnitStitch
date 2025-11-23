@@ -18,6 +18,18 @@ extension ContentView {
                 set: { newValue in
                     // Remove all non-numeric and non-sign characters
                     let filtered = newValue.filter { $0.isNumber || $0 == "+" || $0 == "-" }
+                    
+                    if filtered.isEmpty {
+                        text.wrappedValue = 0   // or nil if using optional later
+                        return
+                    }
+
+                    // Treat a lone "+" or "-" as empty
+                    if filtered == "+" || filtered == "-" {
+                        text.wrappedValue = 0
+                        return
+                    }
+
                     if let intValue = Int(filtered) {
                         text.wrappedValue = intValue
                     }
