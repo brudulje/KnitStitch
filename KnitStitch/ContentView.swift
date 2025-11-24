@@ -98,14 +98,3 @@ struct ContentView: View {
     } // end View
     
 }
-
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
-                                        to: nil, from: nil, for: nil)
-    }
-}
-
-//#Preview {
-//    ContentView()
-//}

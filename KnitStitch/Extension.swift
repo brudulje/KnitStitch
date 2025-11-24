@@ -1,4 +1,5 @@
 import SwiftUI
+
 extension ContentView {
     // MARK: - Reusable number field
     @ViewBuilder
@@ -66,5 +67,12 @@ extension ContentView {
         let current = text.wrappedValue
         let updated = max(0, min(9999, current + amount))
         text.wrappedValue = updated
+    }
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                        to: nil, from: nil, for: nil)
     }
 }
