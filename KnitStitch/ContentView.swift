@@ -10,23 +10,35 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject private var viewModel = KnitStitchViewModel()
+    @State private var showAbout: Bool = false
     
     var body: some View {
         GeometryReader { geo in
             VStack {
-                ZStack {
-                    HStack{
-                        // Logo
+                ZStack(alignment: .topTrailing) {
+                    HStack {
                         Spacer()
                         Text("KnitStitch")
                             .foregroundColor(Color.purple)
                             .font(.headline)
                             .padding(5)
-//                            .background(Color.secondary.opacity(0.1))  // no background, using frame instead
                             .foregroundColor(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.purple, lineWidth: 2))
                         Spacer()
+                        
+                    }
+                    Menu {
+                        Button("ℹ About") { showAbout = true }
+                    }label: {
+                        Text("☰")
+                            .frame(width: geo.size.width * 0.1,
+                                   height: geo.size.width * 0.1)
+                            .font(.title)
+//                            .foregroundColor(Color.purple)
+//                            .background(Color.purple.opacity(0.2))
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .padding(.trailing, 6)
                     }
                 }
                 .frame(height: geo.size.height * 0.04)
@@ -87,6 +99,9 @@ struct ContentView: View {
                     
                 
             }  // end VStack
+            .sheet(isPresented: $showAbout) {
+                AboutView()
+            }
             .padding()
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
