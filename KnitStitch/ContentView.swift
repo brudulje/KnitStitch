@@ -21,17 +21,17 @@ struct ContentView: View {
                         Text("KnitStitch")
                             .foregroundColor(Color.purple)
                             .font(.headline)
-                            .padding(3)
+                            .padding(5)
 //                            .background(Color.secondary.opacity(0.1))  // no background, using frame instead
                             .foregroundColor(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
-                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.purple, lineWidth: 1))
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.purple, lineWidth: 2))
                         Spacer()
                     }
                 }
                 .frame(height: geo.size.height * 0.04)
 
-                Text("I have this many stitches:")
+                Text("Starting with this many stitches:")
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 numberField(title: "Before", text: Binding(
@@ -42,7 +42,7 @@ struct ContentView: View {
                         viewModel.recalcFromBefore()
                     }
 
-                Text("I want to change by:")
+                Text("I want to increase / decrease by:")
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 HStack {
