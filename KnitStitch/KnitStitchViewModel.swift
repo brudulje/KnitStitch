@@ -59,30 +59,33 @@ class KnitStitchViewModel: ObservableObject {
             if c > 0 {  // Adding stitches
 //                print("Adding")
                 if sometimes == 0 {
-                    recipe += "Knit \(howoften) stitches, add one;\n"
+                    recipe += "Knit \(howoften) stitches, add one"
                 }
                 else {
                     recipe += "Knit \(howoften + 1) stitches, add one, \(sometimes) time"
-                    if sometimes == 1 { recipe += ";\n" } else { recipe += "s;\n" }
-                    recipe += "Knit \(howoften) stitches, add one, \(othertimes) time"
-                    if othertimes == 1 { recipe += ";\n" } else { recipe += "s;\n" }
+                    if sometimes == 1 { recipe += "" } else { recipe += "s" }
+                    recipe += ";\nKnit \(howoften) stitches, add one, \(othertimes) time"
+                    if othertimes == 1 { recipe += "" } else { recipe += "s" }
                     
                 }
             }
             else  { // Reducing stitches
 //                print("Reducing")
                 if sometimes == 0 {
-                    recipe += "Knit \(abs(howoften) - 2) stitches, two together;\n"
+                    recipe += "Knit \(abs(howoften) - 2) stitches, two together"
                 }
                 else {
                     recipe += "Knit \(abs(howoften) - 1) stitches, two together, \(sometimes) time"
-                    if sometimes == 1 { recipe += ";\n" } else { recipe += "s;\n" }
-                    recipe += "Knit \(abs(howoften) - 2) stitches, two together, \(othertimes) time"
-                    if othertimes == 1 { recipe += ";\n" } else { recipe += "s;\n" }
+                    if sometimes == 1 { recipe += "" } else { recipe += "s" }
+                    recipe += ";\nKnit \(abs(howoften) - 2) stitches, two together, \(othertimes) time"
+                    if othertimes == 1 { recipe += "" } else { recipe += "s" }
                 }
             }
-            
-            recipe += "repeat until end of row."
+            if sometimes + othertimes != abs(change ?? 0) {
+                recipe += ";\nrepeat until end of row."
+            }else{
+                recipe += "."
+            }
         }
     }
     
